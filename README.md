@@ -6,42 +6,42 @@ A minimal TeX Live distribution (~41MB) with intelligent file auto-detection, au
 
 ```bash
 # Auto-detect and compile with bibliography support included
-nix run github:alexmill/texMini
+nix run github:composable-science/texMini
 
 # Specify files explicitly (recommended for scripts and automation)
-nix run github:alexmill/texMini -- document.tex bibliography.bib
+nix run github:composable-science/texMini -- document.tex bibliography.bib
 
 # Just specify .tex file (auto-detects .bib if present and unambiguous)
-nix run github:alexmill/texMini -- document.tex
+nix run github:composable-science/texMini -- document.tex
 ```
 
 ## Full Details
 ```bash
 # Auto-detect .tex file in current directory (bibliography support included)
-nix run github:alexmill/texMini#pdflatex
+nix run github:composable-science/texMini#pdflatex
 
 # Or specify explicitly  
-nix run github:alexmill/texMini#pdflatex -- document.tex
+nix run github:composable-science/texMini#pdflatex -- document.tex
 
 # Different engines - with bibliography support by default
-nix run github:alexmill/texMini#lualatex -- document.tex
-nix run github:alexmill/texMini#xelatex -- document.tex
+nix run github:composable-science/texMini#lualatex -- document.tex
+nix run github:composable-science/texMini#xelatex -- document.tex
 
 # Lightweight versions without bibliography packages
-nix run github:alexmill/texMini#pdflatex-basic -- document.tex
-nix run github:alexmill/texMini#lualatex-basic -- document.tex  
-nix run github:alexmill/texMini#xelatex-basic -- document.tex
+nix run github:composable-science/texMini#pdflatex-basic -- document.tex
+nix run github:composable-science/texMini#lualatex-basic -- document.tex  
+nix run github:composable-science/texMini#xelatex-basic -- document.tex
 
 # Use latexmk (most common, bibliography support included)
-nix run github:alexmill/texMini#latexmk -- -pdf document.tex
+nix run github:composable-science/texMini#latexmk -- -pdf document.tex
 
 # Keep auxiliary files for debugging
-nix run github:alexmill/texMini#pdflatex -- document.tex --no-clean
+nix run github:composable-science/texMini#pdflatex -- document.tex --no-clean
 
 # For local development, use nix shell
-nix shell github:alexmill/texMini          # bibliography support included
+nix shell github:composable-science/texMini          # bibliography support included
 # or for lightweight shell:
-nix shell github:alexmill/texMini#texMiniBasic
+nix shell github:composable-science/texMini#texMiniBasic
 ```
 
 ## Smart Features
@@ -77,7 +77,7 @@ For VS Code integration, choose the appropriate level and configure LaTeX Worksh
       "command": "nix",
       "args": [
         "run",
-        "github:alexmill/texMini#latexmk",
+        "github:composable-science/texMini#latexmk",
         "--",
         "-pdf",
         "-interaction=nonstopmode",
@@ -90,7 +90,7 @@ For VS Code integration, choose the appropriate level and configure LaTeX Worksh
       "command": "nix",
       "args": [
         "run",
-        "github:alexmill/texMini#latexmk-basic",
+        "github:composable-science/texMini#latexmk-basic",
         "--",
         "-pdf", 
         "-interaction=nonstopmode",
@@ -117,11 +117,11 @@ For VS Code integration, choose the appropriate level and configure LaTeX Worksh
 ### Single File Projects
 ```bash
 # If directory contains only "thesis.tex":
-nix run github:alexmill/texMini#pdflatex
+nix run github:composable-science/texMini#pdflatex
 # → Auto-detects and compiles thesis.tex (with bibliography support)
 
 # If directory contains "paper.tex" and "refs.bib":
-nix run github:alexmill/texMini#pdflatex
+nix run github:composable-science/texMini#pdflatex
 # → Auto-detects paper.tex, detects bibliography usage,
 #   automatically processes refs.bib if referenced in the document
 ```
@@ -129,17 +129,17 @@ nix run github:alexmill/texMini#pdflatex
 ### Multiple File Scenarios
 ```bash
 # Directory with "intro.tex", "main.tex", "conclusion.tex":
-nix run github:alexmill/texMini#pdflatex
+nix run github:composable-science/texMini#pdflatex
 # → Error: Multiple .tex files found, please specify which to compile
 
-nix run github:alexmill/texMini#pdflatex -- main.tex
+nix run github:composable-science/texMini#pdflatex -- main.tex
 # → Compiles main.tex explicitly
 ```
 
 ### Bibliography Auto-Detection
 ```bash
 # Document with \usepackage{biblatex} or \bibliography{} commands:
-nix run github:alexmill/texMini#pdflatex -- paper.tex
+nix run github:composable-science/texMini#pdflatex -- paper.tex
 # → Automatically detects and processes bibliography
 # → If single .bib file found, checks if it's referenced
 # → Warns about missing references or multiple .bib files
@@ -152,23 +152,23 @@ texMini supports both explicit file specification and smart auto-detection:
 #### Explicit File Specification (Recommended)
 ```bash
 # Specify .tex file and single .bib file
-nix run github:alexmill/texMini -- paper.tex refs.bib
+nix run github:composable-science/texMini -- paper.tex refs.bib
 
 # Multiple bibliography files
-nix run github:alexmill/texMini -- thesis.tex refs.bib methods.bib
+nix run github:composable-science/texMini -- thesis.tex refs.bib methods.bib
 
 # Only .tex file (auto-detects .bib if unambiguous)  
-nix run github:alexmill/texMini -- paper.tex
+nix run github:composable-science/texMini -- paper.tex
 
 # Mix with latexmk options
-nix run github:alexmill/texMini -- paper.tex refs.bib -pvc    # continuous preview
-nix run github:alexmill/texMini -- paper.tex --no-clean      # keep aux files
+nix run github:composable-science/texMini -- paper.tex refs.bib -pvc    # continuous preview
+nix run github:composable-science/texMini -- paper.tex --no-clean      # keep aux files
 ```
 
 #### Auto-Detection (Convenience)
 ```bash
 # Full auto-detection (works when single .tex file present)
-nix run github:alexmill/texMini
+nix run github:composable-science/texMini
 ```
 
 #### Error Handling
@@ -183,22 +183,22 @@ The system provides helpful feedback:
 Use `nix run` for quick compilation without entering a shell:
 ```bash
 # Auto-detect single .tex file in current directory
-nix run github:alexmill/texMini#latexmk
+nix run github:composable-science/texMini#latexmk
 
 # Or specify explicitly
-nix run github:alexmill/texMini#latexmk -- -pdf document.tex
+nix run github:composable-science/texMini#latexmk -- -pdf document.tex
 ```
 
 ### Development Shell
 Use `nix shell` for interactive development where you'll run multiple commands:
 ```bash
 # Default shell with bibliography support
-nix shell github:alexmill/texMini
+nix shell github:composable-science/texMini
 # Now you have latexmk available in your PATH
 latexmk -pdf document.tex
 
 # For lightweight shell without bibliography
-nix shell github:alexmill/texMini#texMiniBasic
+nix shell github:composable-science/texMini#texMiniBasic
 latexmk -pdf simple-document.tex
 ```
 
@@ -213,8 +213,8 @@ After successful compilation, only essential files remain:
 
 ```bash
 # These all clean up automatically after successful builds:
-nix run github:alexmill/texMini#pdflatex -- thesis.tex
-nix run github:alexmill/texMini#pdflatex-biblio -- paper.tex
+nix run github:composable-science/texMini#pdflatex -- thesis.tex
+nix run github:composable-science/texMini#pdflatex-biblio -- paper.tex
 ```
 
 ### When Cleanup is Disabled
@@ -224,10 +224,10 @@ nix run github:alexmill/texMini#pdflatex-biblio -- paper.tex
 
 ```bash
 # Keep all files for debugging
-nix run github:alexmill/texMini#pdflatex -- document.tex --no-clean
+nix run github:composable-science/texMini#pdflatex -- document.tex --no-clean
 
 # Continuous preview mode (cleanup auto-disabled)
-nix run github:alexmill/texMini#latexmk -- -pdf -pvc document.tex
+nix run github:composable-science/texMini#latexmk -- -pdf -pvc document.tex
 ```
 
 ## Features
@@ -269,15 +269,15 @@ After **successful** compilation, these auxiliary files are automatically remove
 ### Cleanup Examples
 ```bash
 # Before compilation: thesis.tex, refs.bib
-nix run github:alexmill/texMini#pdflatex-biblio -- thesis.tex
+nix run github:composable-science/texMini#pdflatex-biblio -- thesis.tex
 # After: thesis.tex, refs.bib, thesis.pdf (all .aux, .log, etc. removed)
 
 # With multiple documents:
-nix run github:alexmill/texMini#pdflatex -- chapter1.tex  
+nix run github:composable-science/texMini#pdflatex -- chapter1.tex  
 # Cleans chapter1.aux, chapter1.log, etc. (leaves other files untouched)
 
 # Debug mode:
-nix run github:alexmill/texMini#pdflatex -- thesis.tex --no-clean
+nix run github:composable-science/texMini#pdflatex -- thesis.tex --no-clean
 # All auxiliary files preserved for inspection
 ```
 
@@ -288,32 +288,32 @@ texMini provides focused command variants for different needs:
 ### Basic LaTeX (no bibliography)
 ```bash
 # PDF output with pdflatex (most common)
-nix run github:alexmill/texMini#pdflatex -- document.tex
+nix run github:composable-science/texMini#pdflatex -- document.tex
 
 # Alternative engines
-nix run github:alexmill/texMini#lualatex -- document.tex  # Unicode & modern fonts
-nix run github:alexmill/texMini#xelatex -- document.tex   # System fonts
+nix run github:composable-science/texMini#lualatex -- document.tex  # Unicode & modern fonts
+nix run github:composable-science/texMini#xelatex -- document.tex   # System fonts
 
 # Full latexmk control (recommended for complex builds)
-nix run github:alexmill/texMini#latexmk -- -pdf -pvc document.tex
+nix run github:composable-science/texMini#latexmk -- -pdf -pvc document.tex
 ```
 
 ### Bibliography Support
 ```bash
 # Includes biblatex, biber, and csquotes
-nix run github:alexmill/texMini#pdflatex-biblio -- paper.tex
-nix run github:alexmill/texMini#lualatex-biblio -- paper.tex  
-nix run github:alexmill/texMini#xelatex-biblio -- paper.tex
-nix run github:alexmill/texMini#latexmk-biblio -- -pdf paper.tex
+nix run github:composable-science/texMini#pdflatex-biblio -- paper.tex
+nix run github:composable-science/texMini#lualatex-biblio -- paper.tex  
+nix run github:composable-science/texMini#xelatex-biblio -- paper.tex
+nix run github:composable-science/texMini#latexmk-biblio -- -pdf paper.tex
 ```
 
 ### Development Shells
 ```bash
 # Enter a shell with basic LaTeX tools
-nix shell github:alexmill/texMini#texMiniBasic
+nix shell github:composable-science/texMini#texMiniBasic
 
 # Enter a shell with bibliography support  
-nix shell github:alexmill/texMini#texMiniBiblio
+nix shell github:composable-science/texMini#texMiniBiblio
 ```
 ## Advanced Usage
 
@@ -323,7 +323,7 @@ nix shell github:alexmill/texMini#texMiniBiblio
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    texMini.url = "github:alexmill/texMini";
+    texMini.url = "github:composable-science/texMini";
   };
   
   outputs = { self, nixpkgs, texMini }:
@@ -398,21 +398,21 @@ How does texMini compare to other LaTeX distributions?
 ```bash
 # Error: No .tex files found in current directory
 # Solution: Create a .tex file or specify the path
-nix run github:alexmill/texMini#pdflatex -- /path/to/document.tex
+nix run github:composable-science/texMini#pdflatex -- /path/to/document.tex
 ```
 
 **Q: Multiple .tex files found**
 ```bash
 # Error: Multiple .tex files found: main.tex intro.tex conclusion.tex
 # Solution: Specify which file to compile
-nix run github:alexmill/texMini#pdflatex -- main.tex
+nix run github:composable-science/texMini#pdflatex -- main.tex
 ```
 
 **Q: Bibliography not working**
 ```bash
 # Warning: Bibliography commands found but no .bib files found
 # Solution: Create a .bib file or use basic variant instead
-nix run github:alexmill/texMini#pdflatex -- document.tex  # if no bibliography needed
+nix run github:composable-science/texMini#pdflatex -- document.tex  # if no bibliography needed
 ```
 
 **Q: Bibliography file not found**
@@ -420,7 +420,7 @@ nix run github:alexmill/texMini#pdflatex -- document.tex  # if no bibliography n
 # Error: Specified .bib file does not exist: missing.bib
 # Solution: Check the filename and path
 ls *.bib  # List available .bib files
-nix run github:alexmill/texMini -- paper.tex refs.bib  # Use correct filename
+nix run github:composable-science/texMini -- paper.tex refs.bib  # Use correct filename
 ```
 
 **Q: Warning about unreferenced bibliography**
@@ -433,14 +433,14 @@ nix run github:alexmill/texMini -- paper.tex refs.bib  # Use correct filename
 **Q: Multiple bibliography files not working**
 ```bash
 # Make sure all .bib files exist and are referenced:
-nix run github:alexmill/texMini -- thesis.tex refs.bib methods.bib
+nix run github:composable-science/texMini -- thesis.tex refs.bib methods.bib
 # Each .bib file should contain citations used in your document
 ```
 
 **Q: Want to keep auxiliary files for debugging**
 ```bash
 # Use --no-clean flag:
-nix run github:alexmill/texMini#pdflatex -- document.tex --no-clean
+nix run github:composable-science/texMini#pdflatex -- document.tex --no-clean
 ```
 
 **Q: VS Code integration not working**
